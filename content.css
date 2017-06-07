@@ -1,0 +1,25 @@
+enamex[type=person] {
+	background-color: blue;
+	color: white;
+}
+
+enamex[type=location] {
+	background-color: red;
+}
+
+enamex[type=organization] {
+	background-color: green;
+	color: white;
+}
+
+enamex[type=brand] {
+	background-color: yellow;
+}
+
+enamex[type=type] {
+	background-color: orange;
+}
+
+enamex[type=level] {
+	background-color: purple;
+}

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "Tagger",
+  "description": "NER Annotation Tool",
+  "version": "1.0",
+
+  "icons": {
+    "48": "img/icon.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabCapture",
+    "tabs",
+    "contextMenus",
+    "<all_urls>",
+    "*://*/*",
+    "idle"
+  ],
+  
+  // "web_accessible_resources": ["Embedded.htm"],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+ "content_scripts": [ {
+    "all_frames": true,
+    "matches": ["*://*/*","<all_urls>"],
+    "css": [ "dist/css/medium-editor.min.css", "dist/css/medium-editor.css", "dist/css/themes/default.css", "content.css" ],
+    "js": [ "dist/js/medium-editor.js", "dist/js/medium-editor.min.js", "dist/js/medium-button.min.js","content.js"],
+    "run_at": "document_end"
+ } ],
+
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  }
+}
