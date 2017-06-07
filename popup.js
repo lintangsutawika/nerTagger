@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //Event when tag button is clicked
   link.addEventListener('click', function() {
     var tab = ""
+    
     chrome.tabs.query({
       active: true,
       lastFocusedWindow: true
@@ -60,15 +61,28 @@ document.addEventListener('DOMContentLoaded', function() {
     var tagName3_ = encodeURIComponent(document.getElementById('tagName3').value);
     var tagLabel3_ = encodeURIComponent(document.getElementById('tagLabel3').value);
     // console.log(tagName1_);
-    chrome.storage.local.set(
-        {'tagName1': tagName1_, 'tagLabel1':tagLabel1_,
-        'tagName2': tagName2_, 'tagLabel2':tagLabel2_,
-        'tagName3': tagName3_, 'tagLabel3':tagLabel3_}, function(){
+    if (tagName1_ != "" && tagLabel1_ != ""){
+      chrome.storage.local.set({
+        'tagName1': tagName1_, 'tagLabel1':tagLabel1_
+        }, function(){
             // alert("Success");
       });
-    });  
-  
-  
+    }
+    if (tagName2_ != "" && tagLabel2_ != ""){
+      chrome.storage.local.set({
+        'tagName2': tagName2_, 'tagLabel2':tagLabel2_,
+        }, function(){
+            // alert("Success");
+      });
+    }
+    if (tagName3_ != "" && tagLabel3_ != ""){
+      chrome.storage.local.set({
+        'tagName3': tagName3_, 'tagLabel3':tagLabel3_
+        }, function(){
+            // alert("Success");
+      });
+    }
+  });  
 });
 
 chrome.tabs.executeScript( {
@@ -79,10 +93,13 @@ chrome.tabs.executeScript( {
         chrome.storage.local.set({'text': selection[0]}, function(){
             // alert("Success");
         });
-
+          chrome.storage.local.set({'tagFlag': "1"}, function(){
+            // alert("Success");
+          });
           var link = document.getElementById('urlbutton2');
           link.addEventListener('click', function() {
           exportToFile(selection[0]);
+
        });
      });
 
