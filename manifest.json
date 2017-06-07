@@ -4,11 +4,16 @@
   "description": "NER Annotation Tool",
   "version": "1.0",
 
+  "browser_action": {
+    "default_icon": "img/pencil.png",
+    "default_popup": "popup.html"
+  },
+
   "icons": {
     // "48": "img/icon.png"
-    "16": "img/pencil.png",
-    "48": "img/pencil.png",
-    "128": "img/pencil.png"
+    "16": "img/pencil16.png",
+    "48": "img/pencil48.png",
+    "128": "img/pencil128.png"
   },
 
   "permissions": [
@@ -35,10 +40,7 @@
     "css": [ "dist/css/medium-editor.min.css", "dist/css/medium-editor.css", "dist/css/themes/default.css", "content.css" ],
     "js": [ "dist/js/medium-editor.js", "dist/js/medium-editor.min.js", "dist/js/medium-button.min.js", "content.js"],
     "run_at": "document_end"
- } ],
+ } ]
 
-  "browser_action": {
-    "default_icon": "img/icon.png",
-    "default_popup": "popup.html"
-  }
+
 }

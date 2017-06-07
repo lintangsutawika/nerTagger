@@ -6,26 +6,42 @@
         <!-- <script src="content.js"></script> -->
         <title>Tagger</title>
         <link href="popup.css" rel="stylesheet">
+        <link href="content.css" rel="stylesheet">
     </head>
     <body>
     <ul>
         <li>
-            <div class="tagButton">
+        </li>
+        <li>
+            <div class="tagButton" align="center">
                 <button id="urlbutton1">Tag</button>
             </div>
         </li>
         <li>   
-            <div class="saveButton">
+            <div class="saveButton" align="center">
                 <button id="urlbutton2">Save</button>
             </div>
         </li>
         <li>
-            <div class="newTag">
-                <button id="urlbutton3">New</button>
+            <div class="newTag" align="center">
+                <button id="urlbutton3">Toggle</button>
             </div>
         </li>
         <li>
-            <div id="output" class="editable"></div>
+            <div class="newTag" align="center">
+                <div>Tag Name1 <input id="tagName1"></div>
+                <div>Tag Label1 <input id="tagLabel1"></div>
+                <div>Tag Name2 <input id="tagName2"></div>
+                <div>Tag Label2 <input id="tagLabel2"></div>
+                <div>Tag Name3 <input id="tagName3"></div>
+                <div>Tag Label3 <input id="tagLabel3"></div>
+                <button id="urlbutton4">Entities</button>
+            </div>
+        </li>
+        <li>
+            <div style="height:120px;width:180px;border:1px;overflow:auto;">
+                <div id="output" class="editable"></div>
+            </div>
         </li>
     </ul>
     </body>

@@ -12,14 +12,7 @@ enamex[type=organization] {
 	color: white;
 }
 
-enamex[type=brand] {
+enamex {
 	background-color: yellow;
 }
 
-enamex[type=type] {
-	background-color: orange;
-}
-
-enamex[type=level] {
-	background-color: purple;
-}
