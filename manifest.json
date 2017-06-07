@@ -5,7 +5,10 @@
   "version": "1.0",
 
   "icons": {
-    "48": "img/icon.png"
+    // "48": "img/icon.png"
+    "16": "img/pencil.png",
+    "48": "img/pencil.png",
+    "128": "img/pencil.png"
   },
 
   "permissions": [

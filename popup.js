@@ -2,7 +2,6 @@ function sendMessage(url_link){
         chrome.extension.sendMessage({
         action: "openNewTab",
         url: url_link
-        // url: "test.html"
     });
 }
 
