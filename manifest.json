@@ -31,9 +31,9 @@
 
  "content_scripts": [ {
     "all_frames": true,
-    "matches": ["*://*/*","<all_urls>"],
+    "matches": ["<all_urls>"],
     "css": [ "dist/css/medium-editor.min.css", "dist/css/medium-editor.css", "dist/css/themes/default.css", "content.css" ],
-    "js": [ "dist/js/medium-editor.js", "dist/js/medium-editor.min.js", "dist/js/medium-button.min.js","content.js"],
+    "js": [ "dist/js/medium-editor.js", "dist/js/medium-editor.min.js", "dist/js/medium-button.min.js", "content.js"],
     "run_at": "document_end"
  } ],
 
