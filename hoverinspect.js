@@ -79,8 +79,8 @@ var injected = injected || (function() {
       this.stringified = this.serializer.serializeToString(this.$target);
       // this.stringified = this.serializer.serializeToString(this.$shit);
 
-
-      this.codeOutput();
+      this.acquireHover();
+      // this.codeOutput();
 
       this.$cacheEl = this.$target;
       this.layout();
@@ -88,6 +88,12 @@ var injected = injected || (function() {
     },
 
     codeOutput: function() {
+      // this.acquireHover();
+      this.highlight(); // highlight element
+    
+    },
+
+    acquireHover: function(){
       if (this.$cacheElMain === this.$target) return;
       this.$cacheElMain = this.$target;
 
@@ -99,9 +105,6 @@ var injected = injected || (function() {
       // fullCode = fullCode.textContent;
 
       this.$code.innerText = fullCode; // set full element code
-      this.highlight(); // highlight element
-
-
     },
 
     // redraw overlay
@@ -234,8 +237,17 @@ var injected = injected || (function() {
     if (request.action === 'activate') {
       return hi.activate();
     } else {
+      sendResponse({farewell: hi.$code.innerText});
       return hi.deactivate();
     }
+  });
+
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === 'deactivate') {
+      console.log("deactivate");
+      sendResponse({farewell: "goodbye"});
+      // sendResponse({farewell: x});
+    } 
   });
 
   return true;
