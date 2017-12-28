@@ -3,9 +3,9 @@ var injected = injected || (function() {
   // Inspector constructor
 
   var Inspector = function() {
-    this.highlight = this.highlight.bind(this);
+    // this.highlight = this.highlight.bind(this);
     this.log = this.log.bind(this);
-    this.codeOutput = this.codeOutput.bind(this);
+    // this.codeOutput = this.codeOutput.bind(this);
     this.layout = this.layout.bind(this);
     this.handleResize = this.handleResize.bind(this);
 
@@ -58,7 +58,7 @@ var injected = injected || (function() {
       this.width = this.$canvas.width = window.innerWidth;
       this.height = this.$canvas.height = window.innerHeight;
 
-      this.highlight();
+      // this.highlight();
     },
 
     registerEvents: function() {
@@ -83,7 +83,7 @@ var injected = injected || (function() {
       // this.codeOutput();
 
       this.$cacheEl = this.$target;
-      this.layout();
+      this.layout(); //Boxed text is visualized
 
     },
 
@@ -234,20 +234,15 @@ var injected = injected || (function() {
   var hi = new Inspector();
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === 'activate') {
+    if (request.action == 'activate') {
       return hi.activate();
-    } else {
-      sendResponse({farewell: hi.$code.innerText});
+    }
+    else if (request.action == 'text') {
+      sendResponse({requestedText: hi.$code.innerText});
+    } 
+    else if(request.action == 'deactivate'){
       return hi.deactivate();
     }
-  });
-
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === 'deactivate') {
-      console.log("deactivate");
-      sendResponse({farewell: "goodbye"});
-      // sendResponse({farewell: x});
-    } 
   });
 
   return true;

@@ -39,6 +39,23 @@
     "scripts": ["event.js"]
   },
 
+  "commands": {
+    "toggle-tagging": {
+      "suggested_key": {
+      "default": "Ctrl+Q",
+      "mac": "Command+Q"
+      },
+    "description": "Toggle tagging"
+    },
+    "take-text": {
+      "suggested_key": {
+      "default": "Ctrl+Space",
+      "mac": "Command+Space"
+      },
+    "description": "Aquire highlighted text"
+    }
+  },
+
  "content_scripts": [ {
     "all_frames": true,
     "matches": ["<all_urls>"],

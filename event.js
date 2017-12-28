@@ -43,15 +43,16 @@ function genericOnClick(info, tab) {
         activate: function(id) {
 
             this.id = id;
-            chrome.tabs.executeScript(this.id, {
-                file: 'prism.js'
-            });
+            // chrome.tabs.executeScript(this.id, {
+            //     file: 'prism.js'
+            // });
             chrome.tabs.executeScript(this.id, {
                 file: 'hoverinspect.js'
             }, function() {
                 chrome.tabs.sendMessage(this.id, {
                     action: 'activate'
                 });
+
             }.bind(this));
 
             chrome.browserAction.setIcon({
@@ -60,12 +61,6 @@ function genericOnClick(info, tab) {
                     19: "icon_active.png"
                 }
             });
-
-            chrome.tabs.sendMessage(this.id, {
-                action: "activate"
-            }, function(response) {
-                console.log(response.farewell);
-                });
         },
 
         deactivate: function() {
@@ -78,6 +73,7 @@ function genericOnClick(info, tab) {
 
             chrome.browserAction.setIcon({
                 tabId: this.id,
+                // tabCommand: command,
                 path: {
                     // 19: "icon.png"
                     19: "img/pencil.png"
@@ -87,17 +83,23 @@ function genericOnClick(info, tab) {
 
     };
 
+    var toggleFlag = false;
+    var toggleFlags = [];
     function toggle(tab) {
 
         if (!tabs[tab.id]) {
             tabs[tab.id] = Object.create(inspect);
             tabs[tab.id].activate(tab.id);
+            toggleFlag = true;
+            toggleFlags.push(tab.id)
         
         } else {
             tabs[tab.id].deactivate();
             for (var tabId in tabs) {
                 if (tabId == tab.id) delete tabs[tabId];
+                if (tabId == tab.id) remove(toggleFlags, tabId);
             }
+            toggleFlag = false;
         }
     }
 
@@ -113,8 +115,13 @@ function genericOnClick(info, tab) {
         // });
     }
 
-    chrome.browserAction.onClicked.addListener(toggle);
 
+    function remove(array, element) {
+        const index = array.indexOf(element);
+        array.splice(index, 1);
+    }
+
+    chrome.browserAction.onClicked.addListener(toggle);
 
 
     // chrome.runtime.onMessage.addListener(
@@ -127,4 +134,20 @@ function genericOnClick(info, tab) {
             // sendResponse({farewell: "goodbye"});
     // });
 
+    chrome.commands.onCommand.addListener(function(command,tab){
+        if (command == "take-text"){
+            console.log(toggleFlags);
+            chrome.tabs.query({active: true, currentWindow: true},function(arrayOfTabs) {
+                currentTab = arrayOfTabs[0].id
+                if (toggleFlags.indexOf(currentTab) != -1) {
+                    chrome.tabs.sendMessage(currentTab, {
+                        action: 'text'
+                        },function(response) {
+                            console.log(response.requestedText);
+                    });    
+                }
+                
+            });
+        }
+    });
 })();
